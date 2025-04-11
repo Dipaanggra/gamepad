@@ -13,6 +13,8 @@ class GameController extends Controller
         $search = $request->search;
         $games = Game::where('title', 'LIKE', "%$search%")
         ->take(6)->get();
+
+        return view('welcome', ['games' => $games]);
     }
     /**
      * Display a listing of the resource.
