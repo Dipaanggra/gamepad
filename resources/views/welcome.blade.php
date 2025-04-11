@@ -18,11 +18,13 @@
         </div>
     </div> --}}
     <section class="relative">
-        <div class="relative h-[500px] w-full overflow-hidden"><img alt="Featured Game" decoding="async" data-nimg="fill"
+        <div class="relative h-[500px] w-full overflow-hidden">
+            {{-- <img alt="Featured Game" decoding="async" data-nimg="fill"
                 class="object-cover opacity-50"
                 style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                src="{{ Storage::url($games[random_int(0, count($games) - 1)]->cover) }}">
-            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+                src="{{ Storage::url($games[0]->cover) }}"> --}}
+            <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent">
+            </div>
             <div class="absolute inset-0 flex items-center">
                 <div class="container px-4 md:px-6">
                     <div class="max-w-2xl space-y-4">
@@ -32,9 +34,7 @@
                             in your browser. No downloads required.</p>
                         <div class="flex flex-col gap-2 sm:flex-row"><a href="#featured"
                                 class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8">Explore
-                                Games</a><a href="/categories"
-                                class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-11 rounded-md px-8">Browse
-                                Categories</a>
+                                Games</a>
                         </div>
                     </div>
                 </div>
