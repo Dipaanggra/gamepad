@@ -26,7 +26,6 @@ class StoreGameRequest extends FormRequest
             'description' => 'required',
             'game' => 'required',
             'cover' => ['required', 'image', 'max:2048'],
-            'categories' => 'required|array',
         ];
     }
 }

@@ -52,7 +52,6 @@ class GameController extends Controller
             ...$request->validated(),
             ...['cover' => $file->store('games')]
         ]);
-        dd($game);
         return redirect()->route('game.index');
     }
 
