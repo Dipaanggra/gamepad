@@ -8,7 +8,6 @@
                     <th class="px-4 py-2 text-start">Title</th>
                     <th class="px-4 py-2 text-start">Desc</th>
                     <th class="px-4 py-2 text-start">Game</th>
-                    <th class="px-4 py-2 text-start">Categories</th>
                     <th class="px-4 py-2 text-start">Action</th>
                 </tr>
                 @foreach ($games as $game)
@@ -23,15 +22,6 @@
                         </td>
                         <td class="px-4 py-2 truncate max-w-[300px]">{{ $game->description }}</td>
                         <td class="px-4 py-2">{{ $game->game }}</td>
-                        <td class="px-4 py-2">
-                            <div class="flex flex-wrap gap-1">
-                            @foreach ($game->categories as $cat)
-                                <span class="bg-black py-1 px-2 text-sm rounded-lg text-white">
-                                    {{ $cat->name }}
-                                </span>
-                            @endforeach
-                            </div>
-                        </td>
                         <td class="px-4 py-2">
                             <div class="flex gap-4">
                                 <a href="{{ route('game.edit', $game->id) }}" class="text-yellow-500">Edit</a>
