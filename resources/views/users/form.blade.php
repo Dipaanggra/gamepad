@@ -29,7 +29,8 @@
                 <div>
                     <x-input-label for="roles" :value="__('role')" />
                     @foreach ($roles as $role)
-                        <input type="checkbox"  {{ isset($user) ? in_array($role->name, $user->getRoleNames()->toArray()) ? 'checked' : '' : '' }} name="roles[]" id="{{ $role->name }}" value="{{ $role->name }}">
+                        <input type="checkbox"  {{ isset($user) ? in_array($role->name, $user->getRoleNames()->toArray()) ? 'checked' : '' : '' }}
+                        name="roles[]" id="{{ $role->name }}" value="{{ $role->name }}">
                         <label for="{{ $role->name }}">{{$role->name}}</label>
                     @endforeach
                     <x-input-error :messages="$errors->get('role')" class="mt-2" />

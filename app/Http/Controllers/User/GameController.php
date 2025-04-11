@@ -46,11 +46,8 @@ class GameController extends Controller
             ->take(8)
             ->get();
 
-        $categories = $game->categories;
-
         return view('user.game.show', [
             'game' => $game,
-            'categories' => $categories,
             'games' => $games
         ]);
     }
