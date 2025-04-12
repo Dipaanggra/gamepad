@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\GameVersion;
 use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+use function Pest\Laravel\json;
 
 class ScoreController extends Controller
 {
@@ -26,9 +31,16 @@ class ScoreController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Game $game, GameVersion $version)
     {
-        //
+        $validated = $request->validate([
+            'score' => 'required',
+        ]);
+        $score = $version->scores()->updateOrCreate([
+            'user_id' => Auth::id(),
+            'game_version_id' => $version->id
+        ],[...$validated, 'user_id' => Auth::id()]);
+        return response()->json(['status' => 200]);
     }
 
     /**

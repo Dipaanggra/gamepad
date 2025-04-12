@@ -19,10 +19,10 @@
     </div> --}}
     <section class="relative">
         <div class="relative h-[500px] w-full overflow-hidden">
-            {{-- <img alt="Featured Game" decoding="async" data-nimg="fill"
+            <img alt="Featured Game" decoding="async" data-nimg="fill"
                 class="object-cover opacity-50"
                 style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                src="{{ Storage::url($games[0]->cover) }}"> --}}
+                src="{{ Storage::url($games[0]->version->cover) }}">
             <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent">
             </div>
             <div class="absolute inset-0 flex items-center">
@@ -58,7 +58,7 @@
                     </div>
                 </form>
                 <div class="flex flex-wrap gap-2">
-                    <a href="/games">
+                    <a href="/categories">
                         <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer"
                             data-v0-t="badge">More...</div>
                     </a>

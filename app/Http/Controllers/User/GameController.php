@@ -12,7 +12,7 @@ class GameController extends Controller
     {
         $search = $request->search;
         $games = Game::where('title', 'LIKE', "%$search%")
-        ->take(6)->get();
+            ->take(6)->get();
 
         return view('welcome', ['games' => $games]);
     }
@@ -45,10 +45,16 @@ class GameController extends Controller
         $games = Game::whereNot('id', $game->id)
             ->take(8)
             ->get();
+        $scores = $game->version->scores()->with('user')
+            ->orderByDesc('score')
+            ->take(10)
+            ->get();
+
 
         return view('user.game.show', [
             'game' => $game,
-            'games' => $games
+            'games' => $games,
+            'scores' => $scores
         ]);
     }
 }

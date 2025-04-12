@@ -3,7 +3,7 @@
         <div class="aspect-video relative"><img alt="Game thumbnail" loading="lazy" decoding="async" data-nimg="fill"
                 class="object-cover"
                 style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                src="{{ Storage::url($game->cover) }}">
+                src="{{ Storage::url($game->version->cover) }}">
         </div>
         <div class="p-4">
             <h3 class="font-bold  line-clamp-1">{{ $game->title }}</h3>
@@ -19,4 +19,4 @@
             </div>
         </div>
     </div>
-@endforeach
+@endforeach 
