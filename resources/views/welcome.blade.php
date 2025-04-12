@@ -58,7 +58,7 @@
                     </div>
                 </form>
                 <div class="flex flex-wrap gap-2">
-                    <a href="/categories">
+                    <a href="/games">
                         <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground cursor-pointer"
                             data-v0-t="badge">More...</div>
                     </a>

@@ -27,10 +27,10 @@
                             </div>
                         </td>
                         <td class="px-4 py-2 flex gap-4">
-                            <a href="{{ route('user.edit', $user) }}" class="text-yellow-500">Edit</a>
+                            <a href="{{ route('user.edit', $user) }}" class="text-sm hover:bg-yellow-400 py-1 bg-yellow-300 px-2 rounded">Edit</a>
                             <form action="{{ route('user.destroy', $user) }}" method="POST">
                                 @csrf @method('DELETE')
-                                <button>Delete</button>
+                                <button class="text-sm hover:bg-red-600 text-white bg-red-500 px-2 rounded py-1">Delete</button>
                             </form>
                         </td>
                     </tr>

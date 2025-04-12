@@ -39,9 +39,9 @@ class UserController extends Controller
         ]);
         $user = User::create($validated);
         $user->markEmailAsVerified();
-        foreach ($request->roles as $role) {
-            $user->assignRole($role);
-        }
+        // foreach ($request->roles as $role) {
+            $user->syncRoles($request->roles);
+        // }
         return redirect()->route('user.index');
     }
 
@@ -64,9 +64,10 @@ class UserController extends Controller
             'email' => ['required', 'email'],
         ]);
         $user->update($validated);
-        foreach ($request->roles as $role) {
-            $user->assignRole($role);
-        }
+        $user->syncRoles($request->roles);
+        // foreach ($request->roles as $role) {
+        //     $user->assignRole($role);
+        // }
         return redirect()->route('user.index');
     }
 

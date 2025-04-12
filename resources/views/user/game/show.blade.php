@@ -3,7 +3,7 @@
         <div class="relative h-[400px] w-full overflow-hidden">
             <img alt="{{ $game->title }}" decoding="async" data-nimg="fill" class="object-cover"
                 style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                src="{{ Storage::url($game->cover) }}">
+                src="{{ Storage::url($game->version->cover) }}">
             <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
         </div>
         <div class="container relative -mt-32 px-4 md:px-6">
@@ -32,16 +32,41 @@
                     style="animation-duration: 0s;">
                     <div class="grid lg:grid-cols-4 gap-4">
                         <div class="aspect-video lg:col-span-3 overflow-hidden rounded-lg border bg-muted">
-                            <iframe src="{{ Storage::url($game->version->path) }}" class="w-full h-full"
-                                frameborder="0"></iframe>
+                            <iframe x-data="{
+                                sendScore(score) {
+                                        const params = new URLSearchParams();
+                                        fetch(`{{ route('score.store', [$game, $game->version]) }}?${params.toString()}`, {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                    'X-CSRF-TOKEN': document.head.querySelector('meta[name=csrf-token]').content
+                                                },
+                                                body: JSON.stringify({ score })
+                                            })
+                                            .then(res => res.json())
+                                            .then(data => console.log('Skor terkirim:', data))
+                                            .catch(err => console.error('Gagal kirim skor:', err));
+                                    },
+
+                                    init() {
+                                        window.addEventListener('message', (event) => {
+                                            if (event.data?.event_type === 'game_run_end') {
+                                                const score = Math.round(event.data.score);
+                                                this.sendScore(score);
+                                            }
+                                        });
+                                    }
+                            }" src="{{ Storage::url($game->version->path) }}"
+                                class="w-full h-full" frameborder="0"></iframe>
                         </div>
                         <div class="rounded-lg border p-4">
                             <h3 class="text-xl font-bold tracking-tighter sm:text-xl md:text-2xl">
                                 Scores
                             </h3>
                             <ol class="mt-2">
-                                @foreach ($game->version->scores as $i=>$score)
-                                    <li class="{{ $game->user == Auth::user() ? "font-bold" : '' }}">{{ $i+1 }}. {{ $score->user->name }} ({{ $score->score }})</li>
+                                @foreach ($scores as $i => $score)
+                                    <li class="{{ $score->user->id == Auth::id() ? 'font-bold' : '' }}">
+                                        {{ $i + 1 }}. {{ $score->user->name }} ({{ $score->score }})</li>
                                 @endforeach
                             </ol>
                         </div>

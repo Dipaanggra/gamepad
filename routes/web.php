@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameVersionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('game/{game:slug}/{version}')->group(function () {
+        Route::post('/score', [ScoreController::class, 'store'])->name('score.store');
+    });
     // Admin & Developer
     Route::middleware(['role:admin|developer'])
         ->prefix('dashboard')
@@ -31,7 +35,6 @@ Route::middleware('auth')->group(function () {
             Route::prefix('game/{game:slug}')->group(function () {
                 Route::resource('version', GameVersionController::class)->except('index');
             });
-
 
             // User Dashboard
             Route::resource('user', UserController::class)
