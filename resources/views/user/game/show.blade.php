@@ -44,8 +44,6 @@
                                                 body: JSON.stringify({ score })
                                             })
                                             .then(res => res.json())
-                                            .then(data => console.log('Skor terkirim:', data))
-                                            .catch(err => console.error('Gagal kirim skor:', err));
                                     },
 
                                     init() {
