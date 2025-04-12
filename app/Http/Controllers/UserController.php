@@ -38,7 +38,9 @@ class UserController extends Controller
             'password' => ['required'],
         ]);
         $user = User::create($validated)->markEmailAsVerified();
-        $user->syncRoles($request->roles);
+        foreach ($request->roles as $role) {
+            $user->assignRole($role);
+        }
         return redirect()->route('user.index');
     }
 

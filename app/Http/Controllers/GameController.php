@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreGameRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UpdateGameRequest;
+use App\Models\GameVersion;
 
 class GameController extends Controller
 {
@@ -47,11 +48,9 @@ class GameController extends Controller
      */
     public function store(StoreGameRequest $request)
     {
-        $file = $request->file('cover');
-        $game = $request->user()->games()->create([
-            ...$request->validated(),
-            ...['cover' => $file->store('games')]
-        ]);
+        $game = $request->user()->games()->create(
+            $request->validated()
+        );
         return redirect()->route('game.index');
     }
 
@@ -60,7 +59,7 @@ class GameController extends Controller
      */
     public function show(Game $game)
     {
-        return view('games.show', ['game' => $game]);
+        return view('games.show', ['game' => $game, 'versions' => $game->versions()->paginate(5)]);
     }
 
     /**
@@ -70,7 +69,7 @@ class GameController extends Controller
     {
         $user = Auth::user();
         abort_if((!$user->hasRole('admin') && $user()->isNot($game->user)), 401);
-        return view('games.form');
+        return view('games.form', compact('game'));
     }
 
     /**
@@ -78,13 +77,9 @@ class GameController extends Controller
      */
     public function update(UpdateGameRequest $request, Game $game)
     {
-        $gameData = $request->validated();
-        if ($request->hasFile('cover')) {
-            $file = $request->file('cover');
-            Storage::delete($game->cover);
-            $gameData['cover'] = $file->store('games');
-        }
-        $game->update($gameData);
+        $game->update(
+            $request->validated()
+        );
         return redirect()->route('game.index');
     }
 

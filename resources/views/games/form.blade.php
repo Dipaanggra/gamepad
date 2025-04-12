@@ -23,17 +23,6 @@
                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                 </div>
 
-                <div>
-                    <x-input-label for="game" :value="__('Game')" />
-                    <x-text-input id="game" class="block mt-1 w-full" type="text" name="game"
-                        :value="old('game', $game->game ?? '')" required />
-                    <x-input-error :messages="$errors->get('game')" class="mt-2" />
-                </div>
-                <div>
-                    <x-input-label for="cover" :value="__('Cover')" />
-                    <x-file-input id="cover" class="block mt-1 w-full" name="cover" :value="old('cover', $game->cover ?? '')" />
-                    <x-input-error :messages="$errors->get('cover')" class="mt-2" />
-                </div>
                 <div class="flex">
                     <x-primary-button class="mt-3">
                         {{ isset($game) ? 'Update' : 'Submit' }}
