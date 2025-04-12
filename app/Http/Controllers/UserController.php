@@ -37,7 +37,8 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required'],
         ]);
-        $user = User::create($validated)->markEmailAsVerified();
+        $user = User::create($validated);
+        $user->markEmailAsVerified();
         foreach ($request->roles as $role) {
             $user->assignRole($role);
         }

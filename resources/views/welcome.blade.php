@@ -19,10 +19,10 @@
     </div> --}}
     <section class="relative">
         <div class="relative h-[500px] w-full overflow-hidden">
-            <img alt="Featured Game" decoding="async" data-nimg="fill"
+            {{-- <img alt="Featured Game" decoding="async" data-nimg="fill"
                 class="object-cover opacity-50"
                 style="position: absolute; height: 100%; width: 100%; inset: 0px; color: transparent;"
-                src="{{ Storage::url($games[0]->cover) }}">
+                src="{{ Storage::url($games[0]->cover) }}"> --}}
             <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent">
             </div>
             <div class="absolute inset-0 flex items-center">
