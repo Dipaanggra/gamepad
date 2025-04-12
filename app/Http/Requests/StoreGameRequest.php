@@ -17,15 +17,12 @@ class StoreGameRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'title' => 'required',
+            'title' => 'required|unique:games,title',
             'description' => 'required',
-            'game' => 'required',
-            'cover' => ['required', 'image', 'max:2048'],
         ];
     }
 }

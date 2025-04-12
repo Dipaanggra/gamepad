@@ -27,38 +27,29 @@
     </section>
     <section class="py-12">
         <div class="container px-4 md:px-6">
-            <div x-data="{ activeTab: 'play' }" class="space-y-8">
-                <!-- Tab List -->
-                <div role="tablist" aria-orientation="horizontal"
-                    class="h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground grid w-full grid-cols-2"
-                    tabindex="0" style="outline: none;">
-
-                    <!-- Tab 1 -->
-                    <button type="button" role="tab" :aria-selected="activeTab === 'play'"
-                        :data-state="activeTab === 'play' ? 'active' : 'inactive'" @click="activeTab = 'play'"
-                        class="inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-                        :class="activeTab === 'play' ? 'bg-background text-foreground shadow-sm' : ''">
-                        Play Game
-                    </button>
-                </div>
-
-                <!-- Tab Content -->
-                <div>
-                    <div x-show="activeTab === 'play'">
-                        <div :data-state="activeTab === 'play' ? 'active' : 'inactive'"
-                            data-orientation="horizontal" role="tabpanel" aria-labelledby="radix-«re»-trigger-play"
-                            id="radix-«re»-content-play" tabindex="0"
-                            class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-4"
-                            style="animation-duration: 0s;">
-                            <div class="aspect-video overflow-hidden rounded-lg border bg-muted">
-                                <iframe src="{{ $game->game }}" class="w-full h-full" frameborder="0"></iframe>
-                            </div>
-                            <div class="text-sm text-muted-foreground">
-                                <p><strong>Note:</strong> This game runs directly in your browser. No downloads or
-                                    installations
-                                    required.</p>
-                            </div>
+            <div class="space-y-8">
+                <div class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 space-y-4"
+                    style="animation-duration: 0s;">
+                    <div class="grid lg:grid-cols-4 gap-4">
+                        <div class="aspect-video lg:col-span-3 overflow-hidden rounded-lg border bg-muted">
+                            <iframe src="{{ Storage::url($game->version->path) }}" class="w-full h-full"
+                                frameborder="0"></iframe>
                         </div>
+                        <div class="rounded-lg border p-4">
+                            <h3 class="text-xl font-bold tracking-tighter sm:text-xl md:text-2xl">
+                                Scores
+                            </h3>
+                            <ol class="mt-2">
+                                @foreach ($game->version->scores as $i=>$score)
+                                    <li class="{{ $game->user == Auth::user() ? "font-bold" : '' }}">{{ $i+1 }}. {{ $score->user->name }} ({{ $score->score }})</li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="text-sm text-muted-foreground">
+                        <p><strong>Note:</strong> This game runs directly in your browser. No downloads or
+                            installations
+                            required.</p>
                     </div>
                 </div>
             </div>

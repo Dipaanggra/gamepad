@@ -28,9 +28,6 @@ class UpdateGameRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required',
-            'game' => 'required',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id',
         ];
     }
 }
