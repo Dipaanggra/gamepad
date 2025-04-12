@@ -18,9 +18,9 @@
 
 <body>
     <div class="flex min-h-screen flex-col">
-        <header class="sticky top-0 z-40 w-full border-b bg-background">
+        <header x-data="{navOpen: false}" class="sticky top-0 z-40 w-full border-b bg-background">
             <div class="container flex h-16 items-center px-4 md:px-6">
-                <button
+                <button x-on:click="navOpen = ! navOpen"
                     class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 w-10 mr-2 md:hidden"
                     type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«rv»"
                     data-state="closed">
@@ -47,8 +47,8 @@
                     </svg>
                     <span class="hidden font-bold md:inline-block">GameHub</span>
                 </a>
-                <nav class="hidden gap-6 md:flex"><a href="/"
-                        class="flex items-center text-sm font-medium">Home</a>
+                <nav class="hidden gap-6 md:flex">
+                    <a href="/" class="flex items-center text-sm font-medium">Home</a>
                     <a href="/games" class="flex items-center text-sm font-medium">Games</a>
                 </nav>
                 <div class="ml-auto flex items-center gap-2">
@@ -84,6 +84,10 @@
                     @endauth
                 </div>
             </div>
+            <nav x-show="navOpen" x-transition class="md:hidden flex flex-col">
+                <a href="/" class="flex items-center p-4 hover:bg-muted text-lg font-medium">Home</a>
+                <a href="/games" class="flex items-center p-4 hover:bg-muted text-lg font-medium">Games</a>
+            </nav>
         </header>
         <main class="flex-1">
             {{ $slot }}
